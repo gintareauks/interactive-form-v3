@@ -91,14 +91,42 @@ const CVV = document.getElementById("cvv");
 const form = document.querySelector("form");
 const legendActivities = document.querySelector("#activities legend");
 
-
-function inputEmpty(input){
-    return /^\s*$/.test(input);
+function alert(input) {
+    event.preventDefault();
+    input.style.border = "2px solid red";
+    input.parentElement.classList.add("not-valid");
+    input.parentElement.classList.remove("valid");
+    input.parentElement.lastElementChild.style.display = "block";
 }
 
-function isValidEmail(input) {
+function validNow(input) {
+    input.style.border = "initial";
+    input.parentElement.classList.add("valid");
+    input.parentElement.classList.remove("not-valid");
+    input.parentElement.lastElementChild.style.display = "none";
+}
+
+function inputIsEmpty(){
+    const invalidName = /^\s*$/.test(nameInput.value);
+
+    if (invalidName == true) {
+        alert(nameInput)
+    } else {
+        validNow(nameInput)
+    }
+
+    return invalidName;
+}
+
+function isValidEmail() {
     const emailHint = document.getElementById("email-hint")
-    const validEmail = /^[^@]+@[^@.]+\.[a-z]+$/i.test(input);
+    const validEmail = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value);
+
+    if (validEmail == false) {
+        alert(email)
+    } else {
+        validNow(email)
+    }
 
     if (email.value === "") { 
         emailHint.innerHTML = "Email field cannot be blank"
@@ -109,81 +137,64 @@ function isValidEmail(input) {
     return validEmail;
 }
 
-function activitySelected(input) {
-    return /^[1-9]\d*$/.test(input);
+function activityIsSelected() {
+    const activitySelected = /^[1-9]\d*$/.test(total);
+
+    if (activitySelected == false) {
+       alert(legendActivities)
+       legendActivities.style.border = "initial";
+    } else {
+        validNow(legendActivities)
+    }
+
+    return activitySelected;
 }
 
-function validCardNumber(input) {
-    return /^\d{13,16}$/.test(input);
-     
+function cardNumberisValid() {
+    const validCardNumber = /^\d{13,16}$/.test(cardNumber.value);
+
+    if (validCardNumber == false) {
+        alert(cardNumber)
+    }  else {
+        validNow(cardNumber)
+        }
+
+    return validCardNumber;
 }
 
-function validZip(input) {
-    return /^\d{5}$/.test(input);
+function zipIsValid() {
+    const validZip = /^\d{5}$/.test(zipCode.value);
+
+    if (validZip == false) {
+        alert(zipCode)
+    } else {
+        validNow(zipCode)
+    }
+
+    return validZip;
 }
 
-function validCVV(input) {
-    return /^\d{3}$/.test(input);
+function cvvIsValid() {
+    const validCVV =  /^\d{3}$/.test(CVV.value);
+
+    if (validCVV == false) {
+        alert(CVV)
+    } else {
+        validNow(CVV)
+    }
+
+    return validCVV;
 }
 
 form.addEventListener('submit', (event) => {
-    const nameValue = nameInput.value;
-    if (inputEmpty(nameValue) == true) {
-        nameInput.style.border = "2px solid red";
-        event.preventDefault();
+    inputIsEmpty()
+    isValidEmail()
+    activityIsSelected()
 
-        nameInput.parentElement.classList.add("not-valid");
-        nameInput.parentElement.classList.remove("valid");
-        nameInput.parentElement.lastElementChild.style.display = "block";
-    } 
-    
-    if (isValidEmail(email.value) == false) {
-        email.style.border = "2px solid red";
-        event.preventDefault();
-
-        email.parentElement.classList.add("not-valid");
-        email.parentElement.classList.remove("valid");
-        email.parentElement.lastElementChild.style.display = "block";
-    }
-
-    if (activitySelected(total) == false) {
-        legendActivities.style.color = 'red';
-        event.preventDefault();
-
-        legendActivities.parentElement.classList.add("not-valid");
-        legendActivities.parentElement.classList.remove("valid");
-        legendActivities.parentElement.lastElementChild.style.display = "block";
-    }
-
-    
-    if (creditCard.style.display == 'block') {
-
-        if (validCardNumber(cardNumber.value) == false) {
-            cardNumber.style.border = "2px solid red";
-            event.preventDefault();
-
-            cardNumber.parentElement.classList.add("not-valid");
-            cardNumber.parentElement.classList.remove("valid");
-            cardNumber.parentElement.lastElementChild.style.display = "block";
-        } 
-  
-        if (validZip(zipCode.value) == false) {
-            zipCode.style.border = "2px solid red";
-            event.preventDefault();
-
-            zipCode.parentElement.classList.add("not-valid");
-            zipCode.parentElement.classList.remove("valid");
-            zipCode.parentElement.lastElementChild.style.display = "block";
-        }
-
-        if (validCVV(CVV.value) == false) {
-            CVV.style.border = "2px solid red";
-            event.preventDefault();
-
-            CVV.parentElement.classList.add("not-valid");
-            CVV.parentElement.classList.remove("valid");
-            CVV.parentElement.lastElementChild.style.display = "block";
-        }
+    if (payment.value == 'credit-card') {
+        cardNumberisValid()
+        zipIsValid()
+        cvvIsValid()
     }
 })
 
@@ -201,7 +212,6 @@ for (i = 0; i < activityInputs.length; i++) {
 }
 
 // EXCEEDS
-
 activities.addEventListener('click', (event) => {    
     const eventAttribute = event.target.getAttribute('data-day-and-time');
 
@@ -224,21 +234,10 @@ activities.addEventListener('click', (event) => {
 
 
 creditCard.addEventListener('keyup', () => {
-    if (validCardNumber(cardNumber.value) == false) {
-        cardNumber.style.border = "2px solid red";
-        event.preventDefault();
-
-        cardNumber.parentElement.classList.add("not-valid");
-        cardNumber.parentElement.classList.remove("valid");
-        cardNumber.parentElement.lastElementChild.style.display = "block";
-    } else {
-            cardNumber.style.border = "initial";
-            cardNumber.parentElement.classList.add("valid");
-            cardNumber.parentElement.classList.remove("not-valid");
-            cardNumber.parentElement.lastElementChild.style.display = "none";
-        }
+    cardNumberisValid()
+    zipIsValid()
+    cvvIsValid()
 })
-
 
 
 
