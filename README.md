@@ -3,9 +3,9 @@ Techdegree Full Stack JS Project 3
 
 // REAL TIME VALIDATION 
 Credit card forms that are neccessary to fill in have real time validation. These include:
-- Credit card number => Displays an error message when less than 13 or more than 16 digits are entered. A new message displays when the Card number is valid. 
-- Zip code => error message when less than or more than 5 digits. A new message displays when Zip code is valid.
-- CVV => error message when lass than 3 or more than 3 digits. A new message displays when CVV is valid.
+- Credit card number => Displays an error message when less than 13 or more than 16 digits are entered. Valid sign displayed when the Card number is valid. 
+- Zip code => Error message when less than or more than 5 digits are entered. Valid sign displayed when Zip code is valid.
+- CVV => Error message when less than or more than 3 digits entered. Valid sign displayed when CVV is valid.
 
 // CONDITIONAL ERROR MESSAGE
 Email field has 2 conditional error messages that switch depending on the situation.
