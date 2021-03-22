@@ -169,7 +169,7 @@ function isValidEmail() {
         validNow(email)
     }
 
-    // More accurate info displayed for better accessibility
+    // Conditional messages if error found
     if (email.value === "") { 
         emailHint.innerHTML = "Email field cannot be blank"
     } else {
@@ -249,6 +249,9 @@ creditCard.addEventListener('keyup', () => {
     zipIsValid()
     cvvIsValid()
 })
+
+
+
 
 
 
