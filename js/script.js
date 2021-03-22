@@ -121,32 +121,69 @@ form.addEventListener('submit', (event) => {
     if (inputEmpty(nameValue) == true) {
         nameInput.style.border = "2px solid red";
         event.preventDefault();
+
+        nameInput.parentElement.classList.add("not-valid");
+        nameInput.parentElement.classList.remove("valid");
+        nameInput.parentElement.lastElementChild.style.display = "block";
     } 
     
     if (isValidEmail(email.value) == false) {
         email.style.border = "2px solid red";
         event.preventDefault();
+
+        email.parentElement.classList.add("not-valid");
+        email.parentElement.classList.remove("valid");
+        email.parentElement.lastElementChild.style.display = "block";
     }
 
     if (activitySelected(total) == false) {
         legendActivities.style.color = 'red';
         event.preventDefault();
+
+        legendActivities.parentElement.classList.add("not-valid");
+        legendActivities.parentElement.classList.remove("valid");
+        legendActivities.parentElement.lastElementChild.style.display = "block";
     }
 
     if (creditCard.style.display == 'block') {
         if (validCardNumber(cardNumber.value) == false) {
             cardNumber.style.border = "2px solid red";
             event.preventDefault();
+
+            cardNumber.parentElement.classList.add("not-valid");
+            cardNumber.parentElement.classList.remove("valid");
+            cardNumber.parentElement.lastElementChild.style.display = "block";
         }
 
         if (validZip(zipCode.value) == false) {
             zipCode.style.border = "2px solid red";
             event.preventDefault();
+
+            zipCode.parentElement.classList.add("not-valid");
+            zipCode.parentElement.classList.remove("valid");
+            zipCode.parentElement.lastElementChild.style.display = "block";
         }
 
         if (validCVV(CVV.value) == false) {
             CVV.style.border = "2px solid red";
             event.preventDefault();
+
+            CVV.parentElement.classList.add("not-valid");
+            CVV.parentElement.classList.remove("valid");
+            CVV.parentElement.lastElementChild.style.display = "block";
         }
     }
 })
+
+// Accessibility 
+const activityInputs = document.querySelectorAll('[type="checkbox"]')
+
+for (i = 0; i < activityInputs.length; i++) {
+    activityInputs[i].addEventListener('focus', (event) => {
+        event.target.parentElement.className = "focus";
+    })
+
+    activityInputs[i].addEventListener('blur', (event) => {
+        event.target.parentElement.className = "blur";
+    })
+}
