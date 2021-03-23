@@ -9,7 +9,7 @@ const design = document.getElementById("design");
 const activities = document.getElementById("activities");
 const activitiesCost = document.getElementById("activities-cost");
 const registerActivities = document.querySelector("#activities legend");
-const activityInputs = document.querySelectorAll('[type="checkbox"]')
+const activityInputs = document.querySelectorAll('[type="checkbox"]');
 
 const payment = document.getElementById("payment");
 const creditCard = document.getElementById("credit-card");
@@ -22,7 +22,7 @@ const cardNumber = document.getElementById("cc-num");
 const zipCode = document.getElementById("zip");
 const CVV = document.getElementById("cvv");
 const form = document.querySelector("form");
-const emailHint = document.getElementById("email-hint")
+const emailHint = document.getElementById("email-hint");
 
 const paymentOptions = [creditCard, paypal, bitcoin]
 let total = 0;
