@@ -56,8 +56,8 @@ design.addEventListener('change', (event) => {
             colorOptions[i].hidden = false;
             colorOptions[i].setAttribute("selected", true)
         } else if (theme !== dataTheme) {
+            colorOptions[i].removeAttribute("selected", true)
             colorOptions[i].hidden = true;
-            colorOptions[i].setAttribute("selected", false)
         }
     }
 })
